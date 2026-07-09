@@ -6,6 +6,6 @@ spec:
     containers:
       - image: httpd:latest 
         ports:
-          - 80
+          - containerPort: 80
         name: httpdcontainer
         
