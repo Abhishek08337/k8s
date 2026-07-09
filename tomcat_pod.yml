@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  - name: tomcatpod
+   name: tomcatpod
 spec:
   containers:
     - image: tomcat:latest
