@@ -1,10 +1,11 @@
 apiVersion: v1
 kind: Pod
-metadata:
-   name: tomcatpod
+metadata: 
+   - name: Tomcatpod
 spec:
-  containers:
-    - image: tomcat:latest
-    ports:
-      - containerPort: 8080
-    name: TomcatContainer
+   containers:
+      - name: Tomcatcontainer
+      image: tomcat:latest
+      ports: 
+         - containerPort: 8080
+         
