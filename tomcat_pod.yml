@@ -4,7 +4,7 @@ metadata:
   - name: tomcatpod
 spec:
   containers:
-    image: tomcat:latest
+    - image: tomcat:latest
     ports:
       - containerPort: 8080
     name: TomcatContainer
