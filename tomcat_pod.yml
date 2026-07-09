@@ -3,7 +3,8 @@ kind: Pod
 metadata:
   - name: tomcatpod
 spec:
-  image: tomcat:latest
-  - ports:
-    - containerPort: 8080
+  containers:
+    image: tomcat:latest
+      - ports:
+        - containerPort: 8080
     name: TomcatContainer
