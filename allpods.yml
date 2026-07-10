@@ -6,8 +6,8 @@ metadata:
     app: nginx
 spec:
   containers:
-    - name: nginxcontainer
-      image: nginx:latest
+      name: nginxcontainer
+      - image: nginx:latest
       ports:
         - containerPort: 80
 ---
