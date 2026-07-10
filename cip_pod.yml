@@ -6,8 +6,8 @@ metadata:
     app: httpd
 spec: 
   containers:
-    name: httpdcont
-    - image: httpd:latest
+    - name: httpdcont
+      image: httpd:latest
       ports:
         - containerPort: 80
 ---
