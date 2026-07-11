@@ -1,21 +1,20 @@
 apiVersion: apps/v1
-kind: ReplicaSet
-metadata:
-  name: repset 
+kind: ReplicationSet
+metadata: 
+  name: httpdrepset
 spec:
-  replicas: 5
+  replicas: 2
   selector:
     matchLabels:
-      app: nginx
+      app: httpd
   template:
-    metadata: 
-      name: nginxcont
-      labels: 
-        app: nginx
+    metadata:
+      name: httpdpod
+      labels:
+        app: httpd
     spec:
       containers:
-        - name: nginxcontainer
-          image: nginx:latest
+        - name: httpdcont
+          image: httpd:latest
           ports:
             - containerPort: 80
-    
