@@ -7,7 +7,8 @@ metadata:
 spec:
   replicas: 3
   selector:
-    app: nginxrpset
+    matchlabels:
+      app: nginxrpset
   template:
     metadata:
       name: nginxpod
