@@ -10,7 +10,8 @@ spec:
   template:
     metadata: 
       name: nginxcont
-      labels: nginx
+      labels: 
+        app: nginx
     spec:
       containers:
         - name: nginxcontainer
