@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata: 
+  name: set 
+  labels:
+    app: set
+spec:
+  replicas: 3
+  selector: 
+    matchLabels:
+      app: mysqldbset
+  template:
+    metadata:
+      name: mysqlpod
+      labels:
+        app: dbset 
+    spec:
+      containers:
+        - name: mysqlcont
+          image: mysql:latest
+          ports:
+            - containerPort: 3306
+              protocol: TCP
+          env:
+            - name: MYSQL_ROOT_PASSWORD
+              value: "123456"
