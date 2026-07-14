@@ -7,8 +7,8 @@ metadata:
 spec:
   replicas: 5
   selector:
-  matchLabels:
-    app: mysqlset
+    matchLabels:
+      app: mysqlset
   template:
     metadata:
       name: mysqlpod 
