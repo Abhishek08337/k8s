@@ -1,19 +1,19 @@
 apiVersion: apps/v1
-kind: StatefulSet
-metadata: 
-  name: set 
+kind: StatefulSet 
+metadata:
+  name: dbstatefulset
   labels:
-    app: set
+    app: sset 
 spec:
-  replicas: 3
-  selector: 
+  replicas: 5
+  selector:
     matchLabels:
-      app: dbset
+      app: mysqldbset
   template:
     metadata:
       name: mysqlpod
       labels:
-        app: dbset 
+        app: mysqldbset
     spec:
       containers:
         - name: mysqlcont
