@@ -19,7 +19,7 @@ spec:
         - name: mysqlcont
           image: mysql:latest 
           ports:
-            - containerPort: 80
+            - containerPort: 3306
               protocol: TCP 
           env:
             - name: MYSQL_ROOT_PASSWORD 
