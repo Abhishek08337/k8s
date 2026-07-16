@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+    name: stfsdbkey-config
+    labels:
+        app: key 
+data:
+    my_key: "123452170"
+    
