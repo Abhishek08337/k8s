@@ -8,7 +8,7 @@ spec:
   replicas: 2
   selector:
     matchLabels: 
-      app: dbstf1
+      app: sqlpod
   template:
     metadata:
       name: mysqlpod
