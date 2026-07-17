@@ -1,0 +1,29 @@
+apiVersion:
+kind:
+metadata:
+  name: rollst
+  labels:
+    app: strat
+spec:
+  replicas: 4
+  selector:
+    matchLabels: 
+      app: nginxrollstr
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+  template:
+    metadata:
+      name: nginxpod
+      labels:
+        app: nginxrollstr
+    spec:
+      containers:
+        - name: nginxcont
+          image: nginx:latest
+          ports:
+            - name: nginx 
+              containerPort: 80
+              protocol: TCP
