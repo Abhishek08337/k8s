@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: dset 
+  labels:
+    app: dsset
+spec:
+  selector:
+    matchLabels: 
+      app: daemonsetfluentcd
+  template:
+    metadata:
+      name: fluentpod
+      labels:
+        app: daemonsetfluentcd
+    spec:
+      containers:
+        - name: daemoncont
+          image: fluent/fluentd:latest 
+          ports:
+            - containerPort: 24224
+              protocol: TCP 
