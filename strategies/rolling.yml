@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment 
+metadata:
+  name: httpd-deployment 
+  labels:
+    app: httpd-apache2
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: httpd1
+  strategy:
+    type: RollingUpdate 
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+  template:
+    metadata:
+      name: httpdpod
+      labels:
+        app: httpd1
+    spec:
+      containers:
+        - name: httpdcont
+          image: httpd:latest
+          ports:
+            - name: httpd-ports
+              containerPort:
+              protocol: TCP
