@@ -19,4 +19,4 @@ spec:
           image: fluent/fluentd:latest 
           ports:
             - containerPort: 24224
-              protocol: FORWARD
+              protocol: TCP
