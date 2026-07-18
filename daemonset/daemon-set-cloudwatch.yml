@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: dsset
+  labels:
+    app: dsset-aws
+spec:
+  selector:
+    matchLabels:  
+      app: aws-cloudwatch
+  template:
+    metadata:
+      name: aws-cloudwatch-pod
+      labels: aws-cloudwatch
+    spec:
+      containers:  
+        - name: cloudwatchcont
+          image: amazon/cloudwatch-agent:latest
+          
