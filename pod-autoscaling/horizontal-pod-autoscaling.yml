@@ -1,0 +1,62 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: httpdhpa
+  labels:
+    app: https 
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: https-pod
+  strategy:
+    type: RollingUpdate 
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+  template:
+    metadata:
+      name: httpd-pod 
+      labels:
+        app: https-pod
+    spec: 
+      containers:
+        - name: httpdcont
+          image: httpd:latest
+          ports:
+            - containerPort: 80
+              protocol: TCP 
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "100Mi"
+            limits:
+              cpu: "500m"
+              memory: "512Mi"
+---
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler 
+metadata:
+  name: httpdhpa
+  labels:
+    app: http 
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: httpdhpa 
+  minReplicas: 1
+  maxReplicas: 5
+  metrics:
+    - type: Resource 
+      resource:
+        name: cpu
+        target: 
+        type: Utilization
+        averageUtilization: 50
+    - type: Resource
+      resource:
+      name: memory 
+      target:
+      type: utilization 
+      averageUtilization: 70
