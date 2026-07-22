@@ -12,4 +12,5 @@ spec:
   capacity:
       storage: 10Gi
   persistentVolumeReclaimPolicy: Recycle
-  hostPath: "/home/"  
+  hostPath: 
+    path: "/home/"  
