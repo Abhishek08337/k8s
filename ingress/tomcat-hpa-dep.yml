@@ -1,0 +1,62 @@
+apiVersion: apps/v1
+kind: Deployment 
+metadata:
+  name: tomcatdep
+  labels:
+    type: hpa-dep 
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: tomcat-hpa-dep
+  strategy:
+    type: RollingUpdate 
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+  template:
+    metadata:
+      name: tomcatpod 
+      labels:
+        app: tomcat-hpa-dep 
+    spec:
+      containers:
+        - name: tomcatcont
+          image: tomcat:latest
+          ports:
+            - containerPort: 80
+              protocol: TCP 
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "128Mi"
+            limits:
+              cpu: "500m"
+              memory: "512Mi"
+---
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: tomcahpa
+  labels:
+    type: dephpa
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: myhpadep 
+  minReplicas: 1
+  maxReplicas: 3
+  metrics:
+    - type: Resource
+      resource: 
+        name: cpu 
+        target:
+          type: Utilization
+          averageUtilization: 67
+    - type: Resource
+      resource:
+        name: memory
+        target: 
+          type: Utilization 
+          averageUtilization: 725
