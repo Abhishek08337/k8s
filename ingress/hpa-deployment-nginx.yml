@@ -1,31 +1,31 @@
-apiVersion: apps/v1 
-kind: Deployment
+apiVersion: apps/v1
+kind: Deployment 
 metadata:
-  name: nginxdep
+  name: nginxdep-hpapod
   labels:
-    type: dep 
+    type: dep-hpa
 spec:
   replicas: 2
   selector:
     matchLabels:
-      app: hpadep
+      app: nginxhpa
   strategy:
-    type: RollingUpdate
-    rollingUpdate:
-      maxSurge: 1
-      maxUnavailable: 0 
+      type: RollingUpdate 
+      rollingUpdate:
+        maxSurge: 1
+        maxUnavailable: 0
   template:
     metadata:
-      name: nginxpod
+      name: nginxpod 
       labels:
-        app: hpadep
+        app: nginxhpa 
     spec:
       containers:
         - name: nginxcont
-          image: nginx:latest
-          ports:  
+          image: nginx:latest 
+          ports:
             - containerPort: 80
-              protocol: TCP
+              protocol: TCP 
           resources:
             requests:
               cpu: "100m"
@@ -34,29 +34,29 @@ spec:
               cpu: "500m"
               memory: "512Mi"
 ---
-apiVersion: autoscaling/v2
+apiVersion: autoscaling/v2 
 kind: HorizontalPodAutoscaler
 metadata:
-  name: myhpa
+  name: hpa 
   labels:
-    type: autohpdep
+    type: hpa 
 spec:
   scaleTargetRef:
-    apiVersion: apps/v1 
+    apiVersion: apps/v1
     kind: Deployment
-    name: nginxdep 
+    name: myhpadeploy
   minReplicas: 1
-  maxReplicas: 5
+  maxReplicas: 3
   metrics:
-    - type: Resource
-      resource: 
-        name: cpu 
-        target: 
-          type: Utilization
-          averageUtilization: 65
-    - type: Resource
+    - type: Resource 
       resource:
-        name: memory 
+        name: cpu 
         target:
-          type: Utilization
-          averageUtilization: 75 
+            type: Utilization
+            averageUtilization: 70 
+    - type: Resource 
+      resource:
+        name: memory
+        target:
+            type: Utilization 
+            averageUtilization: 80 
